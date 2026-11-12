@@ -1,0 +1,74 @@
+#include <iostream>
+using namespace std;
+int main() {
+    char email[100],username[100];
+    int atcount=0,j=0,len,warning=0;
+    cout<<"entre your email : ";
+    cin>>email;
+    for(int i=0;email[i]!='\0';i++)
+    { 
+        if(email[i]=='@')
+        atcount++;
+    }
+    if(atcount!=1)
+    {
+        cout<<"wrong email entered !";
+        return 0;
+    }
+    for( j=0;email[j]!='@';j++)
+    {
+        username[j]=email[j];
+    }
+    username[j]='\0';
+    len=j;
+    if(len==0)
+    {
+        cout<<"Invalid email entered: NO username found!!";
+        return 0;
+    }
+    if(len>50)
+    {
+        cout<<"Invalid Email Username TOO Long !! PLEASE CHECK IT :";
+        return 0;
+    }
+    if(username[0]=='.'|| username[0]=='_'|| username[len-1]=='.'||username[len-1]=='_')
+    {
+        cout<<"Invalid Username !! Please check positions of'_'and '. !! Thank you !!";
+        return 0;
+    }
+    for(int i=0;username[i]!='\0';i++)
+    {
+        if(!(
+            (username[i]>='A'&& username[i]<='Z')||
+            (username[i]>='a'&& username[i]<='z')||
+            (username[i]>='0'&& username[i]<='9')||
+            (username[i]=='_')||(username[i]=='.')
+            )
+            )
+        {
+            warning++;
+            break;
+        }
+    }
+    if(warning>0)
+    {
+        cout<<"Invalid Character Entered in Email Adress !!";
+        return 0;
+    }
+    for(int i=0;username[i]!='\0';i++)
+    {
+        if(username[i]=='.' && username[i+1]=='.')
+        {
+            cout<<"Invalid !! Consequitive '.' Entered ";
+            return 0;
+        }
+        
+    }
+    if(email[len+1]=='\0')
+    {
+      cout<<"Domain Name Error !! "; 
+      return 0;
+    }
+    cout<<"YES Valid Email Entered !!"<<endl;
+    return 0;
+}
